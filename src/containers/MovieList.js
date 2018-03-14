@@ -1,7 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as selectors from '../selectors/movieList';
 import MovieListItem from './MovieListItem';
 
-export default class MovieList extends React.PureComponent{
+
+class MovieList extends React.PureComponent{
     render(){
         const {movies} = this.props;
         return <div>
@@ -13,3 +16,11 @@ export default class MovieList extends React.PureComponent{
         </div>
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        movies: selectors.getMovies(state)
+    }
+}
+
+export default connect(mapStateToProps)(MovieList);
